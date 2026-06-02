@@ -40,22 +40,29 @@ jobs:
         id: publish
         shell: bash
         run: |
-          if [ -d ".output/public" ]; then
-            publish_dir=".output/public"
-          elif [ -d "dist/client" ]; then
-            publish_dir="dist/client"
-          elif [ -d "dist" ]; then
-            publish_dir="dist"
-          else
-            echo "No supported publish directory found" >&2
+          publish_dir=""
+
+          for candidate in ".output/public" "dist/client" "dist"; do
+            if [ -f "$candidate/index.html" ]; then
+              publish_dir="$candidate"
+              break
+            fi
+
+            if [ -f "$candidate/ai-study-companion/index.html" ]; then
+              cp "$candidate/ai-study-companion/index.html" "$candidate/index.html"
+              publish_dir="$candidate"
+              break
+            fi
+          done
+
+          if [ -z "$publish_dir" ]; then
+            echo "No index.html found in supported publish directories" >&2
+            find . -path "./node_modules" -prune -o -name "index.html" -print
             exit 1
           fi
 
           touch "$publish_dir/.nojekyll"
-
-          if [ -f "$publish_dir/index.html" ]; then
-            cp "$publish_dir/index.html" "$publish_dir/404.html"
-          fi
+          cp "$publish_dir/index.html" "$publish_dir/404.html"
 
           echo "path=$publish_dir" >> "$GITHUB_OUTPUT"
 
