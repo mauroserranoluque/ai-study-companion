@@ -53,7 +53,7 @@ const compare = [
   { tool: "Wolfram", price: "Free / Pro", level: "Ciencias", ease: 3, precision: 5, use: "Cálculos" },
 ];
 
-function Index() {
+export function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Nav />
