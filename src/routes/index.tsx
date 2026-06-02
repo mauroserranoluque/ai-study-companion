@@ -234,10 +234,10 @@ function Assistant() {
 
         <div className="rounded-3xl bg-white text-foreground p-6 sm:p-8 shadow-glow">
           <div className="grid sm:grid-cols-2 gap-4">
-            <Field label="Asignatura" icon={BookOpen} value={data.subject} options={["Matemáticas","Física","Química","Historia","Lengua","Idiomas","Programación"]} onChange={v => setData(d=>({...d, subject:v}))}/>
-            <Field label="Objetivo" icon={Target} value={data.goal} options={["Entender un tema","Preparar examen","Hacer un trabajo","Memorizar","Practicar"]} onChange={v => setData(d=>({...d, goal:v}))}/>
-            <Field label="Nivel" icon={GraduationCap} value={data.level} options={["ESO","Bachillerato","Universidad","Profesional"]} onChange={v => setData(d=>({...d, level:v}))}/>
-            <Field label="Tiempo disponible" icon={Clock} value={data.time} options={["15 min","30 min","1 hora","2+ horas"]} onChange={v => setData(d=>({...d, time:v}))}/>
+            <Field label="Asignatura" icon={BookOpen} value={data.subject} options={["Matemáticas","Física","Química","Historia","Lengua","Idiomas","Programación"]} onChange={(v: string) => setData(d=>({...d, subject:v}))}/>
+            <Field label="Objetivo" icon={Target} value={data.goal} options={["Entender un tema","Preparar examen","Hacer un trabajo","Memorizar","Practicar"]} onChange={(v: string) => setData(d=>({...d, goal:v}))}/>
+            <Field label="Nivel" icon={GraduationCap} value={data.level} options={["ESO","Bachillerato","Universidad","Profesional"]} onChange={(v: string) => setData(d=>({...d, level:v}))}/>
+            <Field label="Tiempo disponible" icon={Clock} value={data.time} options={["15 min","30 min","1 hora","2+ horas"]} onChange={(v: string) => setData(d=>({...d, time:v}))}/>
           </div>
           <button onClick={recommend} className="mt-6 w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-xl bg-hero text-white font-semibold shadow-glow hover:scale-[1.01] transition">
             <Wand2 className="w-4 h-4" /> Generar mi plan
